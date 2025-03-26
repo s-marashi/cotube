@@ -1,8 +1,8 @@
 package service
 
 import (
-	"colab-tube/internal/domain"
-	"colab-tube/internal/modules/meeting"
+	"github.com/s-marashi/cotube/internal/domain"
+	"github.com/s-marashi/cotube/internal/modules/meeting"
 
 	"github.com/google/uuid"
 )

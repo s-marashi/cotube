@@ -1,6 +1,6 @@
 package meeting
 
-import "colab-tube/internal/domain"
+import "github.com/s-marashi/cotube/internal/domain"
 
 // MeetingRepository defines the methods for meeting storage
 type MeetingRepository interface {

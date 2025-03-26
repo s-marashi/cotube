@@ -1,4 +1,4 @@
-module colab-tube
+module github.com/s-marashi/cotube
 
 go 1.24.1
 

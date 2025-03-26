@@ -1,8 +1,9 @@
 package handlers
 
 import (
-	"colab-tube/internal/modules/meeting"
 	"net/http"
+
+	"github.com/s-marashi/cotube/internal/modules/meeting"
 
 	"github.com/labstack/echo/v4"
 )

@@ -1,9 +1,10 @@
 package repository
 
 import (
-	"colab-tube/internal/domain"
 	"errors"
 	"sync"
+
+	"github.com/s-marashi/cotube/internal/domain"
 )
 
 type InMemoryMeetingRepository struct {

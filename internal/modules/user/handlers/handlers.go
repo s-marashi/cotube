@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"colab-tube/internal/domain"
-	"colab-tube/internal/modules/user"
+	"github.com/s-marashi/cotube/internal/domain"
+	"github.com/s-marashi/cotube/internal/modules/user"
 )
 
 type UserHandler struct {
