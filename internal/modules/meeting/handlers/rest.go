@@ -12,7 +12,7 @@ type MeetingHandler struct {
 	meetingService meeting.MeetingService
 }
 
-func NewMeetingHandler(service meeting.MeetingService) *MeetingHandler {
+func NewMeetingRestHandler(service meeting.MeetingService) *MeetingHandler {
 	return &MeetingHandler{
 		meetingService: service,
 	}
@@ -49,8 +49,4 @@ func (h *MeetingHandler) PollMessages(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, messages)
-}
-
-func (h *MeetingHandler) CreateUser(c echo.Context) error {
-	return c.JSON(http.StatusOK, map[string]string{"status": "user created"})
 }

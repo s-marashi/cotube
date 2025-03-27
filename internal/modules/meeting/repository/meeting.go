@@ -5,20 +5,21 @@ import (
 	"sync"
 
 	"github.com/s-marashi/cotube/internal/domain"
+	"github.com/s-marashi/cotube/internal/modules/meeting"
 )
 
-type InMemoryMeetingRepository struct {
+type inMemoryMeetingRepository struct {
 	meetings map[string]*domain.Meeting
 	mutex    sync.RWMutex
 }
 
-func NewInMemoryMeetingRepository() *InMemoryMeetingRepository {
-	return &InMemoryMeetingRepository{
+func NewInMemoryMeetingRepository() meeting.MeetingRepository {
+	return &inMemoryMeetingRepository{
 		meetings: make(map[string]*domain.Meeting),
 	}
 }
 
-func (r *InMemoryMeetingRepository) Create(meeting *domain.Meeting) error {
+func (r *inMemoryMeetingRepository) Create(meeting *domain.Meeting) error {
 	r.mutex.Lock()
 	defer r.mutex.Unlock()
 
@@ -30,7 +31,7 @@ func (r *InMemoryMeetingRepository) Create(meeting *domain.Meeting) error {
 	return nil
 }
 
-func (r *InMemoryMeetingRepository) FindByID(id string) (*domain.Meeting, error) {
+func (r *inMemoryMeetingRepository) FindByID(id string) (*domain.Meeting, error) {
 	r.mutex.RLock()
 	defer r.mutex.RUnlock()
 
@@ -42,7 +43,7 @@ func (r *InMemoryMeetingRepository) FindByID(id string) (*domain.Meeting, error)
 	return meeting, nil
 }
 
-func (r *InMemoryMeetingRepository) AddUserToMeeting(meetingID string, userID string) error {
+func (r *inMemoryMeetingRepository) AddUserToMeeting(meetingID string, userID string) error {
 	r.mutex.Lock()
 	defer r.mutex.Unlock()
 
@@ -62,7 +63,7 @@ func (r *InMemoryMeetingRepository) AddUserToMeeting(meetingID string, userID st
 	return nil
 }
 
-func (r *InMemoryMeetingRepository) AddMessage(meetingID string, message *domain.Message) error {
+func (r *inMemoryMeetingRepository) AddMessage(meetingID string, message *domain.Message) error {
 	r.mutex.Lock()
 	defer r.mutex.Unlock()
 

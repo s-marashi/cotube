@@ -21,7 +21,7 @@ func main() {
 	meetingService := service.NewMeetingService(meetingRepo)
 
 	// Initialize handlers
-	meetingHandler := handlers.NewMeetingHandler(meetingService)
+	meetingHandler := handlers.NewMeetingRestHandler(meetingService)
 
 	// Routes
 	//e.POST("/users/", )
