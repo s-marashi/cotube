@@ -23,8 +23,13 @@ func NewUserRestHandler(service user.UserService) *UserHandler {
 }
 
 type registerUserRequest struct {
-	Name  string
-	Email string
+	Name  string `json:"name"`
+	Email string `json:"email"`
+}
+
+type registerUserResponse struct {
+	Id string `json:"id"`
+	registerUserRequest
 }
 
 func (h *UserHandler) RegisterUser(c echo.Context) error {
@@ -43,5 +48,11 @@ func (h *UserHandler) RegisterUser(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "internal server error"})
 	}
 
-	return c.JSON(http.StatusCreated, user)
+	return c.JSON(http.StatusCreated, registerUserResponse{
+		Id: user.Id(),
+		registerUserRequest: registerUserRequest{
+			Name:  user.Name(),
+			Email: user.Email(),
+		},
+	})
 }
