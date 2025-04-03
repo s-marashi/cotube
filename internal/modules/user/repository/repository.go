@@ -19,30 +19,34 @@ func NewInMemUserRepository() user.UserRepository {
 	}
 }
 
-func (r *inMemUserRepository) CreateUser(id string, name string, email string) (*domain.User, error) {
-	_, ok := r.idProjection[id]
+func (r *inMemUserRepository) CreateUser(user *domain.User) error {
+	_, ok := r.idProjection[user.Id()]
 	if ok {
-		return nil, UserIdExist
+		return UserIdExist
 	}
 
-	_, ok = r.emailProjection[email]
+	_, ok = r.emailProjection[user.Email()]
 	if ok {
-		return nil, UserEmailExist
+		return UserEmailExist
 	}
 
-	u := &domain.User{
-		ID:    id,
-		Name:  name,
-		Email: email,
+	r.idProjection[user.Id()] = user
+	r.emailProjection[user.Email()] = user
+
+	return nil
+}
+
+func (r *inMemUserRepository) FindByEmail(email string) (*domain.User, error) {
+	user, ok := r.emailProjection[email]
+	if ! ok {
+		return nil, UserNotFound
 	}
 
-	r.idProjection[id] = u
-	r.emailProjection[email] = u
-
-	return u, nil
+	return user, nil
 }
 
 var (
 	UserIdExist    = errors.New("user id already exists")
 	UserEmailExist = errors.New("email already exists")
+	UserNotFound = errors.New("user not found")
 )

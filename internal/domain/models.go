@@ -2,13 +2,6 @@ package domain
 
 import "time"
 
-// User represents a user in the system.
-type User struct {
-	ID    string
-	Name  string
-	Email string
-}
-
 // Product represents a product in the system.
 type Product struct {
 	ID    string
@@ -48,11 +41,6 @@ const (
 	MeetStatusActive    MeetStatus = "active"
 	MeetStatusCompleted MeetStatus = "completed"
 )
-
-// NewUser creates a new User instance.
-func NewUser(id, name, email string) *User {
-	return &User{ID: id, Name: name, Email: email}
-}
 
 // NewProduct creates a new Product instance.
 func NewProduct(id, name string, price float64) *Product {

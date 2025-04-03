@@ -7,5 +7,6 @@ type UserService interface {
 }
 
 type UserRepository interface {
-	CreateUser(id string, name string, email string) (*domain.User, error)
+	CreateUser(user *domain.User) error
+	FindByEmail(email string) (*domain.User, error)
 }
